@@ -39,9 +39,15 @@ class RolePermissionSeeder extends Seeder
             Permission::firstOrCreate(['name' => $perm]);
         }
 
-        // kasir: hanya POS
+        // kasir: POS + view daily revenues, transactions
         $kasir = Role::firstOrCreate(['name' => 'kasir']);
-        $kasir->syncPermissions(['view kasir']);
+        $kasir->syncPermissions([
+            'view kasir',
+            'view daily revenues',
+            'create daily revenues',
+            'view transactions',
+            'create transactions',
+        ]);
 
         // admin: semua kecuali view kasir
         $adminPerms = array_values(array_filter($permissions, fn ($p) => $p !== 'view kasir'));
