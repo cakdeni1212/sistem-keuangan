@@ -14,7 +14,7 @@
 
     <div class="py-8">
         <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="card">
+            <div class="card p-6 space-y-5">
                 <form method="POST" action="{{ route('transactions.store') }}" enctype="multipart/form-data">
                     @csrf
 
@@ -50,12 +50,11 @@
 
                         {{-- Jumlah --}}
                         <div>
-                            <x-input-label for="amount" value="Jumlah (Rp)" />
-                            <div class="relative">
-                                <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-surface-400 text-sm font-medium">Rp</span>
-                                <x-text-input id="amount" name="amount" type="number" min="1" step="1"
-                                    class="pl-12" value="{{ old('amount') }}"
-                                    placeholder="0" required />
+                            <x-input-label for="amount" value="Jumlah" />
+                            <div class="flex rounded-xl border border-surface-300 overflow-hidden focus-within:ring-2 focus-within:ring-brand-500/20 focus-within:border-brand-500 transition">
+                                <span class="flex items-center px-4 py-2.5 bg-surface-50 text-surface-500 text-sm font-semibold border-r border-surface-300">Rp</span>
+                                <input type="number" name="amount" min="1" step="1" value="{{ old('amount') }}" placeholder="0"
+                                       class="flex-1 px-4 py-2.5 text-sm text-surface-900 border-0 focus:outline-none bg-white" required>
                             </div>
                             <x-input-error :messages="$errors->get('amount')" />
                         </div>
