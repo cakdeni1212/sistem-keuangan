@@ -13,7 +13,7 @@ class DashboardController extends Controller
     public function index(): View|RedirectResponse
     {
         if (auth()->user()->hasRole('kasir')) {
-            return redirect()->route('kasir.index');
+            return redirect()->route('daily-revenues.index');
         }
 
         $thisYear = now()->year;
