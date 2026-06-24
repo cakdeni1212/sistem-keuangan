@@ -7,6 +7,9 @@ use App\Models\HppProductIngredient;
 use App\Models\RawMaterial;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class HppProductController extends Controller
 {
@@ -191,5 +194,100 @@ class HppProductController extends Controller
         if ($totalCost > 0) {
             $product->update(['bahan_baku' => $totalCost]);
         }
+    }
+
+    public function importForm(): View
+    {
+        return view('hpp-products.import');
+    }
+
+    public function importExcel(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'file' => 'required|file|mimes:xlsx,xls|max:10240',
+        ]);
+
+        try {
+            $spreadsheet = IOFactory::load($request->file('file')->getRealPath());
+            $data = $spreadsheet->getActiveSheet()->toArray();
+        } catch (\Exception $e) {
+            return back()->with('error', 'Gagal membaca file Excel.');
+        }
+
+        // Cari header row
+        $startRow = null;
+        foreach ($data as $i => $row) {
+            $r0 = trim($row[0] ?? '');
+            $r1 = trim($row[1] ?? '');
+            // Deteksi: "Ekspor Daftar Produk" atau kolom "Nama Produk"
+            if ($r0 === 'Ekspor Daftar Produk' || $r0 === 'Outlet' || 
+                ($r0 === 'Outlet/Grup Outlet' && str_contains($r1, 'Nama')) ||
+                (str_contains($r0, 'Nama') && str_contains($r0, 'Produk'))) {
+                $startRow = $i + 1;
+            }
+            // If "Outlet/Grup Outlet" is found on the header row, data starts at row+1
+        }
+
+        // Fallback: find first row with numeric price in col 15
+        if (!$startRow) {
+            foreach ($data as $i => $row) {
+                $price = str_replace(['.', ','], ['', '.'], (string) ($row[15] ?? '0'));
+                if (is_numeric($price) && (float) $price > 0) {
+                    $startRow = $i;
+                    break;
+                }
+            }
+        }
+
+        if (!$startRow) {
+            return back()->with('error', 'Format file tidak dikenal. Gunakan export produk dari Majo POS.');
+        }
+
+        $total = 0;
+        $new = 0;
+        $existing = 0;
+
+        for ($i = $startRow; $i < count($data); $i++) {
+            $row = $data[$i];
+            $name = trim($row[1] ?? '');
+            if (empty($name)) continue;
+
+            $category = trim($row[6] ?? '');
+            $sku = trim($row[16] ?? '');
+            $satuan = trim($row[12] ?? '');
+            $stokMin = (int) ($row[11] ?? 0);
+            $desc = trim($row[7] ?? '');
+            $hargaBeli = (float) str_replace(['.', ','], ['', '.'], (string) ($row[14] ?? '0'));
+            $hargaJual = (float) str_replace(['.', ','], ['', '.'], (string) ($row[15] ?? '0'));
+
+            if ($hargaJual <= 0) continue;
+            $total++;
+
+            // Skip if already exists
+            if (HppProduct::where('name', $name)->exists()) {
+                $existing++;
+                continue;
+            }
+
+            HppProduct::create([
+                'name' => $name,
+                'sku' => $sku ?: null,
+                'category' => $category,
+                'satuan' => $satuan ?: null,
+                'stok_minimum' => $stokMin,
+                'bahan_baku' => $hargaBeli,
+                'tenaga_kerja' => 0,
+                'overhead' => 0,
+                'harga_jual' => $hargaJual,
+                'notes' => $desc ?: null,
+                'is_active' => true,
+                'created_by' => Auth::id(),
+            ]);
+            $new++;
+        }
+
+        return redirect()->route('hpp-products.import')
+            ->with('success', "✅ Berhasil import {$new} produk baru dari {$total} data.")
+            ->with('results', compact('total', 'new', 'existing'));
     }
 }

@@ -96,6 +96,8 @@ Route::middleware(['auth', 'verified', 'permission:delete daily revenues'])->gro
 Route::middleware(['auth', 'verified', 'permission:create hpp'])->group(function () {
     Route::get('/hpp-produk/create', [HppProductController::class, 'create'])->name('hpp-products.create');
     Route::post('/hpp-produk', [HppProductController::class, 'store'])->name('hpp-products.store');
+    Route::get('/hpp-produk/import', [HppProductController::class, 'importForm'])->name('hpp-products.import');
+    Route::post('/hpp-produk/import', [HppProductController::class, 'importExcel'])->name('hpp-products.import.excel');
 });
 
 Route::middleware(['auth', 'verified', 'permission:view hpp'])->group(function () {

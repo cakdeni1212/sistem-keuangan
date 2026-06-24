@@ -6,11 +6,18 @@
                 <p class="text-xs text-surface-400 mt-0.5">Harga pokok dan margin tiap produk</p>
             </div>
             @can('create hpp')
+            <div class="flex items-center gap-2">
+            <a href="{{ route('hpp-products.import') }}"
+               class="btn-secondary">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                Import Excel
+            </a>
             <a href="{{ route('hpp-products.create') }}"
-               class="btn-primary">
+                class="btn-primary">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
                 Tambah Produk
             </a>
+            </div>
             @endcan
         </div>
     </x-slot>
