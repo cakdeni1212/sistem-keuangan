@@ -22,11 +22,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        // Kasir langsung diarahkan ke halaman POS
-        if (Auth::user()->hasRole('kasir')) {
-            return redirect()->intended(route('kasir.index'));
-        }
-
         return redirect()->intended(route('dashboard', absolute: false));
     }
 
