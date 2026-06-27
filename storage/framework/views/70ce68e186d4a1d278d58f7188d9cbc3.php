@@ -27,10 +27,10 @@
     <div class="py-6 px-4 sm:px-6 lg:px-8">
 
             <?php if(session('success')): ?>
-                <div class="mb-4 px-4 py-3 bg-green-100 border border-green-300 text-green-800 rounded-lg"><?php echo e(session('success')); ?></div>
+                <div class="alert-success"><?php echo e(session('success')); ?></div>
             <?php endif; ?>
             <?php if(session('error')): ?>
-                <div class="mb-4 px-4 py-3 bg-red-100 border border-red-300 text-red-800 rounded-lg"><?php echo e(session('error')); ?></div>
+                <div class="alert-error"><?php echo e(session('error')); ?></div>
             <?php endif; ?>
 
             <?php $__currentLoopData = ['pengeluaran' => 'Pengeluaran', 'pemasukan' => 'Pemasukan']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cat => $label): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -60,11 +60,17 @@
                             <?php if($cat === 'pengeluaran'): ?>
                             <td class="px-6 py-3">
                                 <?php if($type->grup === 'Dapur'): ?>
-                                    <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-orange-100 text-orange-700">🍳 Dapur</span>
+                                    <span class="badge inline-flex items-center gap-1 bg-orange-100 text-orange-700">
+                                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>
+                                        Dapur</span>
                                 <?php elseif($type->grup === 'BAR'): ?>
-                                    <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-700">☕ BAR</span>
+                                    <span class="badge inline-flex items-center gap-1 bg-blue-100 text-blue-700">
+                                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                                        BAR</span>
                                 <?php elseif($type->grup === 'Operasional'): ?>
-                                    <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-surface-100 text-surface-600">⚙️ Operasional</span>
+                                    <span class="badge inline-flex items-center gap-1 bg-surface-100 text-surface-600">
+                                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                                        Operasional</span>
                                 <?php else: ?>
                                     <span class="text-xs text-surface-400">—</span>
                                 <?php endif; ?>

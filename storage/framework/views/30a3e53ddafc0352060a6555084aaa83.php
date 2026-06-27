@@ -17,7 +17,7 @@
             <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('create daily revenues')): ?>
             <div class="flex items-center gap-2">
                 <a href="<?php echo e(route('daily-revenues.upload-form')); ?>"
-                   class="inline-flex items-center gap-1.5 px-4 py-2 bg-white border border-surface-300 text-surface-700 text-sm font-medium rounded-xl hover:bg-surface-50 transition">
+                   class="btn-secondary">
                     <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                               d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>
@@ -43,10 +43,10 @@
             <div class="alert-success text-sm"><?php echo e(session('success')); ?></div>
         <?php endif; ?>
         <?php if(session('info')): ?>
-            <div class="px-4 py-3 bg-blue-100 border border-blue-300 text-blue-800 rounded-xl text-sm"><?php echo e(session('info')); ?></div>
+            <div class="alert-info"><?php echo e(session('info')); ?></div>
         <?php endif; ?>
         <?php if(session('import_errors') && count(session('import_errors')) > 0): ?>
-            <div class="px-4 py-3 bg-amber-50 border border-amber-300 text-amber-800 rounded-xl">
+            <div class="alert-warning">
                 <p class="font-medium text-sm mb-1">⚠️ Beberapa baris dilewati:</p>
                 <ul class="text-xs list-disc list-inside space-y-0.5">
                     <?php $__currentLoopData = session('import_errors'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $err): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>

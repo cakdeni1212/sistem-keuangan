@@ -11,8 +11,8 @@
      <?php $__env->slot('header', null, []); ?> 
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
             <div>
-                <h2 class="font-bold text-xl text-surface-800 dark:text-surface-100 leading-tight">Pengeluaran</h2>
-                <p class="text-xs text-surface-500 dark:text-surface-400 mt-0.5">Pantau dan analisis pengeluaran per periode</p>
+                <h2 class="page-title">Pengeluaran</h2>
+                <p class="page-desc">Pantau dan analisis pengeluaran per periode</p>
             </div>
             <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('create transactions')): ?>
             <a href="<?php echo e(route('transactions.create')); ?>"

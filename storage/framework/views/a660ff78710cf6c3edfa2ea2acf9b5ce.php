@@ -10,12 +10,12 @@
 <?php $component->withAttributes([]); ?>
      <?php $__env->slot('header', null, []); ?> 
         <div class="flex items-center gap-4">
-            <a href="<?php echo e(route('transactions.index')); ?>" class="btn-outline text-xs">
+            <a href="<?php echo e(route('transactions.index')); ?>" class="btn-secondary text-xs">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
                 Kembali
             </a>
             <div>
-                <h2 class="text-lg font-bold text-surface-900">Input Transaksi Baru</h2>
+                <h2 class="page-title">Input Transaksi Baru</h2>
                 <p class="text-xs text-surface-400 mt-0.5">Catat pemasukan atau pengeluaran keuangan</p>
             </div>
         </div>
@@ -23,7 +23,7 @@
 
     <div class="py-8">
         <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="card">
+            <div class="card p-6 space-y-5">
                 <form method="POST" action="<?php echo e(route('transactions.store')); ?>" enctype="multipart/form-data">
                     <?php echo csrf_field(); ?>
 
@@ -115,7 +115,7 @@
 <?php $component = $__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581; ?>
 <?php unset($__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581); ?>
 <?php endif; ?>
-                            <select id="transaction_type_id" name="transaction_type_id" class="form-select" required>
+                            <select id="transaction_type_id" name="transaction_type_id" class="input-field" required>
                                 <option value="">-- Pilih Jenis Transaksi --</option>
                                 <?php $__currentLoopData = ['pengeluaran' => 'Pengeluaran', 'pemasukan' => 'Pemasukan']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cat => $label): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <?php if(isset($types[$cat]) && $types[$cat]->count()): ?>
@@ -156,14 +156,14 @@
                         <div>
                             <?php if (isset($component)) { $__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581 = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginale3da9d84bb64e4bc2eeebaafabfb2581 = $attributes; } ?>
-<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.input-label','data' => ['for' => 'amount','value' => 'Jumlah (Rp)']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.input-label','data' => ['for' => 'amount','value' => 'Jumlah']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
 <?php $component->withName('input-label'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
 <?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
 <?php endif; ?>
-<?php $component->withAttributes(['for' => 'amount','value' => 'Jumlah (Rp)']); ?>
+<?php $component->withAttributes(['for' => 'amount','value' => 'Jumlah']); ?>
 <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__attributesOriginale3da9d84bb64e4bc2eeebaafabfb2581)): ?>
@@ -174,28 +174,10 @@
 <?php $component = $__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581; ?>
 <?php unset($__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581); ?>
 <?php endif; ?>
-                            <div class="relative">
-                                <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-surface-400 text-sm font-medium">Rp</span>
-                                <?php if (isset($component)) { $__componentOriginal18c21970322f9e5c938bc954620c12bb = $component; } ?>
-<?php if (isset($attributes)) { $__attributesOriginal18c21970322f9e5c938bc954620c12bb = $attributes; } ?>
-<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.text-input','data' => ['id' => 'amount','name' => 'amount','type' => 'number','min' => '1','step' => '1','class' => 'pl-12','value' => ''.e(old('amount')).'','placeholder' => '0','required' => true]] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
-<?php $component->withName('text-input'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
-<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
-<?php endif; ?>
-<?php $component->withAttributes(['id' => 'amount','name' => 'amount','type' => 'number','min' => '1','step' => '1','class' => 'pl-12','value' => ''.e(old('amount')).'','placeholder' => '0','required' => true]); ?>
-<?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__attributesOriginal18c21970322f9e5c938bc954620c12bb)): ?>
-<?php $attributes = $__attributesOriginal18c21970322f9e5c938bc954620c12bb; ?>
-<?php unset($__attributesOriginal18c21970322f9e5c938bc954620c12bb); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginal18c21970322f9e5c938bc954620c12bb)): ?>
-<?php $component = $__componentOriginal18c21970322f9e5c938bc954620c12bb; ?>
-<?php unset($__componentOriginal18c21970322f9e5c938bc954620c12bb); ?>
-<?php endif; ?>
+                            <div class="flex rounded-xl border border-surface-300 overflow-hidden focus-within:ring-2 focus-within:ring-brand-500/20 focus-within:border-brand-500 transition">
+                                <span class="flex items-center px-4 py-2.5 bg-surface-50 text-surface-500 text-sm font-semibold border-r border-surface-300">Rp</span>
+                                <input type="number" name="amount" min="1" step="1" value="<?php echo e(old('amount')); ?>" placeholder="0"
+                                       class="flex-1 px-4 py-2.5 text-sm text-surface-900 border-0 focus:outline-none bg-white" required>
                             </div>
                             <?php if (isset($component)) { $__componentOriginalf94ed9c5393ef72725d159fe01139746 = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginalf94ed9c5393ef72725d159fe01139746 = $attributes; } ?>
@@ -241,7 +223,7 @@
 <?php $component = $__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581; ?>
 <?php unset($__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581); ?>
 <?php endif; ?>
-                            <textarea id="description" name="description" rows="3" class="form-textarea"
+                            <textarea id="description" name="description" rows="3" class="input-field !resize-y"
                                 placeholder="Catatan tambahan mengenai transaksi ini..."><?php echo e(old('description')); ?></textarea>
                             <?php if (isset($component)) { $__componentOriginalf94ed9c5393ef72725d159fe01139746 = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginalf94ed9c5393ef72725d159fe01139746 = $attributes; } ?>
@@ -306,7 +288,7 @@
                                 <div x-show="!preview" class="grid grid-cols-2 gap-3">
                                     <label class="flex flex-col items-center justify-center h-28 rounded-xl border-2 border-dashed border-surface-300 bg-surface-50 cursor-pointer hover:bg-surface-100 hover:border-brand-300 transition">
                                         <svg class="w-6 h-6 text-surface-400 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/></svg>
-                                        <p class="text-xs font-medium text-white0">Pilih File</p>
+                                        <p class="text-xs font-medium text-surface-500">Pilih File</p>
                                         <p class="text-[10px] text-surface-400 mt-0.5">JPG, PNG, PDF</p>
                                         <input id="nota" name="nota" type="file" accept=".jpg,.jpeg,.png,.pdf" class="hidden"
                                             @change="onFileSelect($event)">
@@ -348,7 +330,7 @@
                                                 <button type="button" @click="retake()" class="flex-1 py-2.5 text-sm border border-surface-300 rounded-xl hover:bg-surface-50 transition font-medium text-surface-600">
                                                     Ulangi
                                                 </button>
-                                                <button type="button" @click="useSnap()" class="flex-1 py-2.5 text-sm gradient-brand text-white rounded-xl hover:shadow-md transition font-semibold">
+                                                <button type="button" @click="useSnap()" class="btn-primary">
                                                     Gunakan Foto
                                                 </button>
                                             </div>
@@ -450,7 +432,7 @@
                     </div>
 
                     <div class="flex items-center justify-end gap-3 mt-8 pt-6 border-t border-surface-100">
-                        <a href="<?php echo e(route('transactions.index')); ?>" class="btn-outline text-xs">Batal</a>
+                        <a href="<?php echo e(route('transactions.index')); ?>" class="btn-secondary text-xs">Batal</a>
                         <?php if (isset($component)) { $__componentOriginald411d1792bd6cc877d687758b753742c = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginald411d1792bd6cc877d687758b753742c = $attributes; } ?>
 <?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.primary-button','data' => []] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>

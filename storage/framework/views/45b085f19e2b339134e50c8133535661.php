@@ -10,45 +10,29 @@
 <?php $component->withAttributes([]); ?>
      <?php $__env->slot('header', null, []); ?> 
         <div class="flex items-center gap-3">
-            <a href="<?php echo e(route('daily-revenues.index')); ?>" class="btn-secondary btn-sm">&larr; Kembali</a>
-            <h2 class="page-title">Input Omset Harian</h2>
+            <a href="<?php echo e(route('transaction-types.index')); ?>" class="btn-secondary btn-sm">&larr; Kembali</a>
+            <h2 class="page-title">Edit: <?php echo e($transactionType->name); ?></h2>
         </div>
      <?php $__env->endSlot(); ?>
 
     <div class="py-8">
         <div class="max-w-lg mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="card p-6 space-y-5">
+            <div class="bg-white shadow rounded-lg p-6">
+                <form method="POST" action="<?php echo e(route('transaction-types.update', $transactionType)); ?>"
+                      x-data="{ category: '<?php echo e(old('category', $transactionType->category)); ?>' }">
+                    <?php echo csrf_field(); ?> <?php echo method_field('PUT'); ?>
 
-                
-                <?php if($penjualanWarning): ?>
-                <div class="flex items-start gap-3 px-4 py-3 bg-amber-50 border border-amber-200 rounded-xl">
-                    <span class="text-amber-500 text-lg mt-0.5">⚠️</span>
-                    <div class="text-sm text-amber-800">
-                        <p class="font-semibold">Data penjualan harian sudah terinput untuk tanggal ini</p>
-                        <p class="mt-0.5 text-amber-700">
-                            Total omset: <strong>Rp <?php echo e(number_format($penjualanWarning->total_omset, 0, ',', '.')); ?></strong>
-                            (<?php echo e(number_format($penjualanWarning->total_qty)); ?> pcs terjual)
-                        </p>
-                        <p class="mt-1 text-xs text-amber-600">Pastikan input omset QRIS + Tunai sesuai dengan data penjualan harian.</p>
-                    </div>
-                </div>
-                <?php endif; ?>
-
-                <form method="POST" action="<?php echo e(route('daily-revenues.store')); ?>" class="space-y-5">
-                    <?php echo csrf_field(); ?>
-
-                    
-                    <div>
+                    <div class="mb-4">
                         <?php if (isset($component)) { $__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581 = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginale3da9d84bb64e4bc2eeebaafabfb2581 = $attributes; } ?>
-<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.input-label','data' => ['for' => 'date','value' => 'Tanggal']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.input-label','data' => ['for' => 'name','value' => 'Nama Jenis Transaksi']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
 <?php $component->withName('input-label'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
 <?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
 <?php endif; ?>
-<?php $component->withAttributes(['for' => 'date','value' => 'Tanggal']); ?>
+<?php $component->withAttributes(['for' => 'name','value' => 'Nama Jenis Transaksi']); ?>
 <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__attributesOriginale3da9d84bb64e4bc2eeebaafabfb2581)): ?>
@@ -61,14 +45,14 @@
 <?php endif; ?>
                         <?php if (isset($component)) { $__componentOriginal18c21970322f9e5c938bc954620c12bb = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginal18c21970322f9e5c938bc954620c12bb = $attributes; } ?>
-<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.text-input','data' => ['type' => 'date','name' => 'date','value' => ''.e(old('date', $today)).'','max' => ''.e(now()->toDateString()).'','required' => true]] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.text-input','data' => ['id' => 'name','name' => 'name','type' => 'text','class' => 'mt-1 block w-full','value' => ''.e(old('name', $transactionType->name)).'','required' => true,'autofocus' => true]] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
 <?php $component->withName('text-input'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
 <?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
 <?php endif; ?>
-<?php $component->withAttributes(['type' => 'date','name' => 'date','value' => ''.e(old('date', $today)).'','max' => ''.e(now()->toDateString()).'','required' => true]); ?>
+<?php $component->withAttributes(['id' => 'name','name' => 'name','type' => 'text','class' => 'mt-1 block w-full','value' => ''.e(old('name', $transactionType->name)).'','required' => true,'autofocus' => true]); ?>
 <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__attributesOriginal18c21970322f9e5c938bc954620c12bb)): ?>
@@ -81,14 +65,14 @@
 <?php endif; ?>
                         <?php if (isset($component)) { $__componentOriginalf94ed9c5393ef72725d159fe01139746 = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginalf94ed9c5393ef72725d159fe01139746 = $attributes; } ?>
-<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.input-error','data' => ['messages' => $errors->get('date')]] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.input-error','data' => ['messages' => $errors->get('name'),'class' => 'mt-1']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
 <?php $component->withName('input-error'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
 <?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
 <?php endif; ?>
-<?php $component->withAttributes(['messages' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute($errors->get('date'))]); ?>
+<?php $component->withAttributes(['messages' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute($errors->get('name')),'class' => 'mt-1']); ?>
 <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__attributesOriginalf94ed9c5393ef72725d159fe01139746)): ?>
@@ -101,18 +85,17 @@
 <?php endif; ?>
                     </div>
 
-                    
-                    <div>
+                    <div class="mb-4">
                         <?php if (isset($component)) { $__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581 = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginale3da9d84bb64e4bc2eeebaafabfb2581 = $attributes; } ?>
-<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.input-label','data' => ['value' => 'Pendapatan QRIS']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.input-label','data' => ['for' => 'category','value' => 'Kategori']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
 <?php $component->withName('input-label'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
 <?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
 <?php endif; ?>
-<?php $component->withAttributes(['value' => 'Pendapatan QRIS']); ?>
+<?php $component->withAttributes(['for' => 'category','value' => 'Kategori']); ?>
 <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__attributesOriginale3da9d84bb64e4bc2eeebaafabfb2581)): ?>
@@ -123,21 +106,21 @@
 <?php $component = $__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581; ?>
 <?php unset($__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581); ?>
 <?php endif; ?>
-                        <div class="flex rounded-xl border border-surface-300 overflow-hidden focus-within:ring-2 focus-within:ring-brand-500/20 focus-within:border-brand-500 transition">
-                            <span class="flex items-center px-4 py-2.5 bg-surface-50 text-surface-500 text-sm font-semibold border-r border-surface-300">Rp</span>
-                            <input type="number" name="qris_amount" value="<?php echo e(old('qris_amount', 0)); ?>" min="0" step="any"
-                                   class="flex-1 px-4 py-2.5 text-sm text-surface-900 border-0 focus:outline-none bg-white" required>
-                        </div>
+                        <select id="category" name="category" x-model="category"
+                            class="mt-1 input-field w-full">
+                            <option value="pengeluaran" <?php echo e(old('category', $transactionType->category) === 'pengeluaran' ? 'selected' : ''); ?>>Pengeluaran</option>
+                            <option value="pemasukan"   <?php echo e(old('category', $transactionType->category) === 'pemasukan'   ? 'selected' : ''); ?>>Pemasukan</option>
+                        </select>
                         <?php if (isset($component)) { $__componentOriginalf94ed9c5393ef72725d159fe01139746 = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginalf94ed9c5393ef72725d159fe01139746 = $attributes; } ?>
-<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.input-error','data' => ['messages' => $errors->get('qris_amount')]] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.input-error','data' => ['messages' => $errors->get('category'),'class' => 'mt-1']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
 <?php $component->withName('input-error'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
 <?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
 <?php endif; ?>
-<?php $component->withAttributes(['messages' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute($errors->get('qris_amount'))]); ?>
+<?php $component->withAttributes(['messages' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute($errors->get('category')),'class' => 'mt-1']); ?>
 <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__attributesOriginalf94ed9c5393ef72725d159fe01139746)): ?>
@@ -150,18 +133,17 @@
 <?php endif; ?>
                     </div>
 
-                    
-                    <div>
+                    <div class="mb-4" x-show="category === 'pengeluaran'" x-cloak>
                         <?php if (isset($component)) { $__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581 = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginale3da9d84bb64e4bc2eeebaafabfb2581 = $attributes; } ?>
-<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.input-label','data' => ['value' => 'Pendapatan Tunai']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.input-label','data' => ['for' => 'grup','value' => 'Grup Dapur/BAR (opsional)']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
 <?php $component->withName('input-label'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
 <?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
 <?php endif; ?>
-<?php $component->withAttributes(['value' => 'Pendapatan Tunai']); ?>
+<?php $component->withAttributes(['for' => 'grup','value' => 'Grup Dapur/BAR (opsional)']); ?>
 <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__attributesOriginale3da9d84bb64e4bc2eeebaafabfb2581)): ?>
@@ -172,21 +154,24 @@
 <?php $component = $__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581; ?>
 <?php unset($__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581); ?>
 <?php endif; ?>
-                        <div class="flex rounded-xl border border-surface-300 overflow-hidden focus-within:ring-2 focus-within:ring-brand-500/20 focus-within:border-brand-500 transition">
-                            <span class="flex items-center px-4 py-2.5 bg-surface-50 text-surface-500 text-sm font-semibold border-r border-surface-300">Rp</span>
-                            <input type="number" name="tunai_amount" value="<?php echo e(old('tunai_amount', 0)); ?>" min="0" step="any"
-                                   class="flex-1 px-4 py-2.5 text-sm text-surface-900 border-0 focus:outline-none bg-white" required>
-                        </div>
+                        <select id="grup" name="grup"
+                            class="mt-1 input-field w-full">
+                            <option value="" <?php echo e(old('grup', $transactionType->grup) === null || old('grup', $transactionType->grup) === '' ? 'selected' : ''); ?>>-- Tanpa Grup --</option>
+                            <option value="Dapur" <?php echo e(old('grup', $transactionType->grup) === 'Dapur' ? 'selected' : ''); ?>>🍳 Dapur</option>
+                            <option value="BAR"   <?php echo e(old('grup', $transactionType->grup) === 'BAR'   ? 'selected' : ''); ?>>☕ BAR</option>
+                            <option value="Operasional" <?php echo e(old('grup', $transactionType->grup) === 'Operasional' ? 'selected' : ''); ?>>⚙️ Operasional</option>
+                        </select>
+                        <p class="text-xs text-surface-400 mt-1">Pilih untuk mengelompokkan biaya ke Dapur atau BAR.</p>
                         <?php if (isset($component)) { $__componentOriginalf94ed9c5393ef72725d159fe01139746 = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginalf94ed9c5393ef72725d159fe01139746 = $attributes; } ?>
-<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.input-error','data' => ['messages' => $errors->get('tunai_amount')]] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.input-error','data' => ['messages' => $errors->get('grup'),'class' => 'mt-1']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
 <?php $component->withName('input-error'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
 <?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
 <?php endif; ?>
-<?php $component->withAttributes(['messages' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute($errors->get('tunai_amount'))]); ?>
+<?php $component->withAttributes(['messages' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute($errors->get('grup')),'class' => 'mt-1']); ?>
 <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__attributesOriginalf94ed9c5393ef72725d159fe01139746)): ?>
@@ -199,36 +184,17 @@
 <?php endif; ?>
                     </div>
 
-                    
-                    <div class="bg-brand-50 rounded-xl p-4 flex justify-between items-center"
-                         x-data="{
-                            qris: <?php echo e(old('qris_amount', 0)); ?>,
-                            tunai: <?php echo e(old('tunai_amount', 0)); ?>,
-                            get total() { return parseInt(this.qris||0) + parseInt(this.tunai||0); },
-                            fmt(n) { return 'Rp ' + parseInt(n||0).toLocaleString('id-ID'); }
-                         }"
-                         @input.window="
-                            let q = document.querySelector('[name=qris_amount]');
-                            let t = document.querySelector('[name=tunai_amount]');
-                            if(q) qris = q.value;
-                            if(t) tunai = t.value;
-                         ">
-                        <span class="text-sm font-medium text-brand-700">Total Omset</span>
-                        <span class="text-lg font-bold text-brand-800" x-text="fmt(total)">Rp 0</span>
-                    </div>
-
-                    
-                    <div>
+                    <div class="mb-4">
                         <?php if (isset($component)) { $__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581 = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginale3da9d84bb64e4bc2eeebaafabfb2581 = $attributes; } ?>
-<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.input-label','data' => ['for' => 'notes','value' => 'Catatan (opsional)']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.input-label','data' => ['for' => 'description','value' => 'Deskripsi (opsional)']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
 <?php $component->withName('input-label'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
 <?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
 <?php endif; ?>
-<?php $component->withAttributes(['for' => 'notes','value' => 'Catatan (opsional)']); ?>
+<?php $component->withAttributes(['for' => 'description','value' => 'Deskripsi (opsional)']); ?>
 <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__attributesOriginale3da9d84bb64e4bc2eeebaafabfb2581)): ?>
@@ -239,17 +205,18 @@
 <?php $component = $__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581; ?>
 <?php unset($__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581); ?>
 <?php endif; ?>
-                        <textarea name="notes" rows="2" class="input-field !resize-y" placeholder="Misal: ramai karena acara, promo weekend..."><?php echo e(old('notes')); ?></textarea>
+                        <textarea id="description" name="description" rows="2"
+                            class="mt-1 input-field w-full"><?php echo e(old('description', $transactionType->description)); ?></textarea>
                         <?php if (isset($component)) { $__componentOriginalf94ed9c5393ef72725d159fe01139746 = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginalf94ed9c5393ef72725d159fe01139746 = $attributes; } ?>
-<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.input-error','data' => ['messages' => $errors->get('notes')]] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.input-error','data' => ['messages' => $errors->get('description'),'class' => 'mt-1']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
 <?php $component->withName('input-error'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
 <?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
 <?php endif; ?>
-<?php $component->withAttributes(['messages' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute($errors->get('notes'))]); ?>
+<?php $component->withAttributes(['messages' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute($errors->get('description')),'class' => 'mt-1']); ?>
 <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__attributesOriginalf94ed9c5393ef72725d159fe01139746)): ?>
@@ -262,7 +229,34 @@
 <?php endif; ?>
                     </div>
 
-                    <div class="flex gap-3 pt-2">
+                    <div class="mb-6 flex items-center gap-2">
+                        <input type="checkbox" id="is_active" name="is_active" value="1"
+                            class="rounded border-surface-300 text-brand-600"
+                            <?php echo e(old('is_active', $transactionType->is_active ? '1' : '0') == '1' ? 'checked' : ''); ?>>
+                        <?php if (isset($component)) { $__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581 = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginale3da9d84bb64e4bc2eeebaafabfb2581 = $attributes; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.input-label','data' => ['for' => 'is_active','value' => 'Aktif']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component->withName('input-label'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
+<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
+<?php endif; ?>
+<?php $component->withAttributes(['for' => 'is_active','value' => 'Aktif']); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginale3da9d84bb64e4bc2eeebaafabfb2581)): ?>
+<?php $attributes = $__attributesOriginale3da9d84bb64e4bc2eeebaafabfb2581; ?>
+<?php unset($__attributesOriginale3da9d84bb64e4bc2eeebaafabfb2581); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581)): ?>
+<?php $component = $__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581; ?>
+<?php unset($__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581); ?>
+<?php endif; ?>
+                    </div>
+
+                    <div class="flex justify-end gap-3">
+                        <a href="<?php echo e(route('transaction-types.index')); ?>" class="btn-secondary">Batal</a>
                         <?php if (isset($component)) { $__componentOriginald411d1792bd6cc877d687758b753742c = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginald411d1792bd6cc877d687758b753742c = $attributes; } ?>
 <?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.primary-button','data' => []] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
@@ -272,7 +266,7 @@
 <?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
 <?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
 <?php endif; ?>
-<?php $component->withAttributes([]); ?>Simpan Omset <?php echo $__env->renderComponent(); ?>
+<?php $component->withAttributes([]); ?>Perbarui <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__attributesOriginald411d1792bd6cc877d687758b753742c)): ?>
 <?php $attributes = $__attributesOriginald411d1792bd6cc877d687758b753742c; ?>
@@ -282,10 +276,8 @@
 <?php $component = $__componentOriginald411d1792bd6cc877d687758b753742c; ?>
 <?php unset($__componentOriginald411d1792bd6cc877d687758b753742c); ?>
 <?php endif; ?>
-                        <a href="<?php echo e(route('daily-revenues.index')); ?>" class="btn-secondary">Batal</a>
                     </div>
                 </form>
-
             </div>
         </div>
     </div>
@@ -299,4 +291,4 @@
 <?php $component = $__componentOriginal9ac128a9029c0e4701924bd2d73d7f54; ?>
 <?php unset($__componentOriginal9ac128a9029c0e4701924bd2d73d7f54); ?>
 <?php endif; ?>
-<?php /**PATH /Users/deniubaidillah/Documents/Project/Sistem_Keuangan_clean/resources/views/daily-revenues/create.blade.php ENDPATH**/ ?>
+<?php /**PATH /Users/deniubaidillah/Documents/Project/Sistem_Keuangan_clean/resources/views/transaction-types/edit.blade.php ENDPATH**/ ?>

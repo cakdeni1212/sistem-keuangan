@@ -35,9 +35,9 @@
                         <select id="grup" name="grup"
                             class="mt-1 input-field w-full">
                             <option value="" {{ old('grup', $transactionType->grup) === null || old('grup', $transactionType->grup) === '' ? 'selected' : '' }}>-- Tanpa Grup --</option>
-                            <option value="Dapur" {{ old('grup', $transactionType->grup) === 'Dapur' ? 'selected' : '' }}>🍳 Dapur</option>
-                            <option value="BAR"   {{ old('grup', $transactionType->grup) === 'BAR'   ? 'selected' : '' }}>☕ BAR</option>
-                            <option value="Operasional" {{ old('grup', $transactionType->grup) === 'Operasional' ? 'selected' : '' }}>⚙️ Operasional</option>
+                            <option value="Dapur" {{ old('grup', $transactionType->grup) === 'Dapur' ? 'selected' : '' }}>Dapur</option>
+                            <option value="BAR"   {{ old('grup', $transactionType->grup) === 'BAR'   ? 'selected' : '' }}>BAR</option>
+                            <option value="Operasional" {{ old('grup', $transactionType->grup) === 'Operasional' ? 'selected' : '' }}>Operasional</option>
                         </select>
                         <p class="text-xs text-surface-400 mt-1">Pilih untuk mengelompokkan biaya ke Dapur atau BAR.</p>
                         <x-input-error :messages="$errors->get('grup')" class="mt-1" />

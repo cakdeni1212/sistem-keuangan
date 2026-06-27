@@ -15,7 +15,7 @@
                 <p class="text-xs text-surface-500 mt-0.5">Data dan rekap gaji seluruh karyawan</p>
             </div>
             <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('create employee')): ?>
-            <a href="<?php echo e(route('employees.create')); ?>" class="px-4 py-2 bg-brand-600 text-white text-sm font-medium rounded-lg hover:bg-brand-700 transition">
+            <a href="<?php echo e(route('employees.create')); ?>" class="btn-primary">
                 + Tambah Karyawan
             </a>
             <?php endif; ?>
@@ -75,7 +75,7 @@
 
                 <?php if($salaryRecords->count() > 0): ?>
                 <a href="<?php echo e(route('laporan.export-gaji', ['month' => $filterMonth, 'year' => $filterYear])); ?>"
-                   class="ml-auto inline-flex items-center gap-1.5 px-3 py-1.5 bg-purple-600 text-white text-xs font-medium rounded-lg hover:bg-purple-700 transition">
+                   class="ml-auto btn-primary btn-sm">
                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                               d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
@@ -153,15 +153,12 @@
 
         
         <?php if(session('success')): ?>
-        <div class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg text-sm">
-            <?php echo e(session('success')); ?>
-
-        </div>
+        <div class="alert-success"><?php echo e(session('success')); ?></div>
         <?php endif; ?>
 
         
         <div class="card">
-            <div class="px-5 py-3.5 border-b flex items-center justify-between">
+            <div class="px-5 py-3.5 border-b border-surface-200 flex items-center justify-between">
                 <h3 class="text-sm font-bold text-surface-700">Daftar Karyawan</h3>
             </div>
             <?php if($employees->isEmpty()): ?>
@@ -199,9 +196,9 @@
                             </td>
                             <td class="px-4 py-3 text-center">
                                 <?php if($emp->status === 'aktif'): ?>
-                                <span class="inline-block px-2 py-0.5 bg-green-100 text-green-700 text-xs font-semibold rounded-full">Aktif</span>
+                                <span class="badge badge-green">Aktif</span>
                                 <?php else: ?>
-                                <span class="inline-block px-2 py-0.5 bg-red-100 text-red-700 text-xs font-semibold rounded-full">Nonaktif</span>
+                                <span class="badge badge-red">Nonaktif</span>
                                 <?php endif; ?>
                             </td>
                             <td class="px-4 py-3 text-center">
@@ -228,7 +225,7 @@
 
         
         <div class="card">
-            <div class="px-5 py-4 border-b flex flex-wrap items-center justify-between gap-3">
+            <div class="px-5 py-4 border-b border-surface-200 flex flex-wrap items-center justify-between gap-3">
                 <div>
                     <h3 class="text-sm font-bold text-surface-700">📊 Rekap Kumulatif Gaji</h3>
                     <p class="text-xs text-surface-400 mt-0.5">Total gaji termasuk bulan-bulan sebelumnya</p>
@@ -268,7 +265,7 @@
 
                     <?php if($rangeTotalAll > 0): ?>
                     <a href="<?php echo e(route('laporan.export-gaji', ['month' => '', 'year' => $rfy])); ?>"
-                       class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-purple-600 text-white text-xs font-medium rounded-lg hover:bg-purple-700 transition">
+                       class="btn-primary btn-sm">
                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                   d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
@@ -356,14 +353,14 @@
 
         
         <div class="card">
-            <div class="px-5 py-4 border-b flex flex-wrap items-center justify-between gap-3">
+            <div class="px-5 py-4 border-b border-surface-200 flex flex-wrap items-center justify-between gap-3">
                 <div>
                     <h3 class="text-sm font-bold text-surface-700">💸 Rekap Gaji — <?php echo e($gajiPeriodLabel); ?></h3>
                     <p class="text-xs text-surface-400 mt-0.5">Detail gaji seluruh karyawan periode ini</p>
                 </div>
                 <?php if($salaryRecords->count() > 0): ?>
                 <a href="<?php echo e(route('laporan.export-gaji', ['month' => $filterMonth, 'year' => $filterYear])); ?>"
-                   class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-purple-600 text-white text-xs font-medium rounded-lg hover:bg-purple-700 transition">
+                   class="btn-primary btn-sm">
                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                               d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
@@ -485,9 +482,9 @@
                             <td class="px-4 py-3 text-right font-bold text-surface-800">Rp <?php echo e(number_format($sal->total_salary, 0, ',', '.')); ?></td>
                             <td class="px-4 py-3 text-center">
                                 <?php if($sal->paid_at): ?>
-                                    <span class="inline-block px-2 py-0.5 bg-green-100 text-green-700 text-xs font-semibold rounded-full">Terbayar</span>
+                                    <span class="badge badge-green">Terbayar</span>
                                 <?php else: ?>
-                                    <span class="inline-block px-2 py-0.5 bg-amber-100 text-amber-700 text-xs font-semibold rounded-full">Belum Bayar</span>
+                                    <span class="badge badge-yellow">Belum Bayar</span>
                                 <?php endif; ?>
                             </td>
                             <td class="px-4 py-3 text-center text-surface-500 text-xs hidden md:table-cell">
