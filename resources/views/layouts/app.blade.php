@@ -77,6 +77,12 @@
                     </x-sidebar-link>
                     @endcan
 
+                    @can('view transactions')
+                    <x-sidebar-link href="{{ route('journals.index') }}" :active="request()->routeIs('journals.*')" icon="book">
+                        Jurnal Umum
+                    </x-sidebar-link>
+                    @endcan
+
                     <p class="px-3 pt-4 pb-1 text-[10px] font-semibold text-surface-500 uppercase tracking-widest">Produk</p>
 
                     @can('view hpp')
@@ -101,13 +107,27 @@
                     </x-sidebar-link>
                     @endcan
 
-                    <p class="px-3 pt-4 pb-1 text-[10px] font-semibold text-surface-500 uppercase tracking-widest">Pengaturan</p>
+                    <p class="px-3 pt-4 pb-1 text-[10px] font-semibold text-surface-500 uppercase tracking-widest">Laporan</p>
 
+                    @role('admin|owner')
+                    <x-sidebar-link href="{{ route('acct-reports.trial-balance') }}" :active="request()->routeIs('acct-reports.*')" icon="chart-pie">
+                        Laporan Akuntansi
+                    </x-sidebar-link>
+                    @endrole
+
+                    @can('view reports')
                     <x-sidebar-link href="{{ route('laporan.index') }}" :active="request()->routeIs('laporan.*')" icon="file-text">
                         Laporan & Export
                     </x-sidebar-link>
+                    @endcan
+
+                    <p class="px-3 pt-4 pb-1 text-[10px] font-semibold text-surface-500 uppercase tracking-widest">Pengaturan</p>
 
                     @role('admin|owner')
+                    <x-sidebar-link href="{{ route('accounts.index') }}" :active="request()->routeIs('accounts.*')" icon="book-open">
+                        Chart of Accounts
+                    </x-sidebar-link>
+
                     <x-sidebar-link href="{{ route('transaction-types.index') }}" :active="request()->routeIs('transaction-types.*')" icon="tags">
                         Jenis Transaksi
                     </x-sidebar-link>

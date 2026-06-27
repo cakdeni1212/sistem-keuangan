@@ -283,6 +283,7 @@
 
                     <p class="px-3 pt-4 pb-1 text-[10px] font-semibold text-surface-500 uppercase tracking-widest">Pengaturan</p>
 
+                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('view reports')): ?>
                     <?php if (isset($component)) { $__componentOriginal3d3185cbc95d2b4d3b41182ae7d7a300 = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginal3d3185cbc95d2b4d3b41182ae7d7a300 = $attributes; } ?>
 <?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.sidebar-link','data' => ['href' => ''.e(route('laporan.index')).'','active' => request()->routeIs('laporan.*'),'icon' => 'file-text']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
@@ -304,6 +305,7 @@
 <?php $component = $__componentOriginal3d3185cbc95d2b4d3b41182ae7d7a300; ?>
 <?php unset($__componentOriginal3d3185cbc95d2b4d3b41182ae7d7a300); ?>
 <?php endif; ?>
+                    <?php endif; ?>
 
                     <?php if (\Illuminate\Support\Facades\Blade::check('role', 'admin|owner')): ?>
                     <?php if (isset($component)) { $__componentOriginal3d3185cbc95d2b4d3b41182ae7d7a300 = $component; } ?>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\CalculatorController;
 use App\Http\Controllers\CashbonController;
@@ -39,6 +40,11 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified', 'role:ad
 // Jenis Transaksi (admin & manajer_keuangan)
 Route::middleware(['auth', 'verified', 'role:admin|owner'])->group(function () {
     Route::resource('transaction-types', TransactionTypeController::class)->except(['show']);
+});
+
+// Chart of Accounts
+Route::middleware(['auth', 'verified', 'role:admin|owner'])->group(function () {
+    Route::resource('accounts', AccountController::class)->except(['show']);
 });
 
 Route::middleware(['auth', 'verified', 'permission:view transactions'])->group(function () {
@@ -215,6 +221,16 @@ Route::middleware(['auth', 'verified'])->prefix('laporan')->name('laporan.')->gr
     Route::get('/export/gaji', [LaporanController::class, 'exportGaji'])->name('export-gaji');
 });
 
+// Acct Reports
+use App\Http\Controllers\AcctReportController;
+
+Route::middleware(['auth', 'verified', 'role:admin|owner'])->prefix('acct-reports')->name('acct-reports.')->group(function () {
+    Route::get('/trial-balance', [AcctReportController::class, 'trialBalance'])->name('trial-balance');
+    Route::get('/income-statement', [AcctReportController::class, 'incomeStatement'])->name('income-statement');
+    Route::get('/balance-sheet', [AcctReportController::class, 'balanceSheet'])->name('balance-sheet');
+    Route::get('/general-ledger', [AcctReportController::class, 'generalLedger'])->name('general-ledger');
+});
+
 // Penjualan Harian
 use App\Http\Controllers\DailySaleController;
 
@@ -234,3 +250,15 @@ Route::middleware(['auth', 'verified', 'role:kasir|admin|owner'])->prefix('penju
 use App\Http\Controllers\TelegramController;
 
 Route::post('/telegram/webhook', [TelegramController::class, 'webhook'])->name('telegram.webhook');
+
+// Jurnal Umum
+use App\Http\Controllers\JournalController;
+
+Route::middleware(['auth', 'verified', 'role:admin|owner'])->prefix('journals')->name('journals.')->group(function () {
+    Route::get('/', [JournalController::class, 'index'])->name('index');
+    Route::get('/create', [JournalController::class, 'create'])->name('create');
+    Route::post('/', [JournalController::class, 'store'])->name('store');
+    Route::get('/{journal}', [JournalController::class, 'show'])->name('show');
+    Route::post('/{journal}/post', [JournalController::class, 'post'])->name('post');
+    Route::post('/{journal}/unpost', [JournalController::class, 'unpost'])->name('unpost');
+});

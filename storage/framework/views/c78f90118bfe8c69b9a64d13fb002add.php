@@ -1,56 +1,67 @@
-<x-app-layout>
-    <x-slot name="header">
+<?php if (isset($component)) { $__componentOriginal9ac128a9029c0e4701924bd2d73d7f54 = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginal9ac128a9029c0e4701924bd2d73d7f54 = $attributes; } ?>
+<?php $component = App\View\Components\AppLayout::resolve([] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component->withName('app-layout'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
+<?php $attributes = $attributes->except(\App\View\Components\AppLayout::ignoredParameterNames()); ?>
+<?php endif; ?>
+<?php $component->withAttributes([]); ?>
+     <?php $__env->slot('header', null, []); ?> 
         <div class="flex items-center justify-between gap-4">
             <div class="flex items-center gap-3">
-                <a href="{{ route('penjualan-harian.index') }}"
+                <a href="<?php echo e(route('penjualan-harian.index')); ?>"
                    class="btn-secondary btn-sm">
                     ← Kembali
                 </a>
                 <div>
                     <h1 class="page-title">
-                        {{ $hasData ? '✏️ Edit Penjualan' : '➕ Input Penjualan' }}
+                        <?php echo e($hasData ? '✏️ Edit Penjualan' : '➕ Input Penjualan'); ?>
+
                     </h1>
                     <p class="text-xs text-surface-500">Masukkan jumlah terjual per produk</p>
                 </div>
             </div>
         </div>
-    </x-slot>
+     <?php $__env->endSlot(); ?>
 
     <div class="py-6 px-4 sm:px-6 lg:px-8"
-         x-data="penjualanForm({{ $products->map(fn($p) => [
+         x-data="penjualanForm(<?php echo e($products->map(fn($p) => [
              'id'    => $p->id,
              'price' => (float) $p->harga_jual,
              'hpp'   => (float) ($p->bahan_baku + $p->tenaga_kerja + $p->overhead),
              'qty'   => (int) ($existing[$p->id] ?? 0),
-         ])->values()->toJson() }}, '{{ $shift }}')">
+         ])->values()->toJson()); ?>, '<?php echo e($shift); ?>')">
 
-        {{-- Warning: data sudah ada --}}
-        @if($hasData)
-        @php $shiftLabel = $shift === 'pagi' ? '☀️ Pagi' : '🌆 Sore'; @endphp
+        
+        <?php if($hasData): ?>
+        <?php $shiftLabel = $shift === 'pagi' ? '☀️ Pagi' : '🌆 Sore'; ?>
         <div class="mb-5 alert-warning flex gap-3">
             <div class="text-amber-500 text-xl flex-shrink-0">⚠️</div>
             <div class="flex-1">
-                <p class="font-semibold text-amber-800 text-sm">Data Shift {{ $shiftLabel }} sudah ada!</p>
+                <p class="font-semibold text-amber-800 text-sm">Data Shift <?php echo e($shiftLabel); ?> sudah ada!</p>
                 <p class="text-amber-700 text-xs mt-0.5">
-                    <strong>{{ \Carbon\Carbon::parse($date)->translatedFormat('l, d F Y') }}</strong>
+                    <strong><?php echo e(\Carbon\Carbon::parse($date)->translatedFormat('l, d F Y')); ?></strong>
                     &nbsp;·&nbsp;
-                    Shift {{ $shiftLabel }}
+                    Shift <?php echo e($shiftLabel); ?>
+
                     &nbsp;·&nbsp;
-                    {{ $existingCount }} produk
+                    <?php echo e($existingCount); ?> produk
                     &nbsp;·&nbsp;
-                    Total: <strong>Rp {{ number_format($existingTotal, 0, ',', '.') }}</strong>
+                    Total: <strong>Rp <?php echo e(number_format($existingTotal, 0, ',', '.')); ?></strong>
                 </p>
                 <p class="text-amber-600 text-xs mt-1">Jika disimpan, data lama akan <strong>digantikan</strong> dengan data baru.</p>
             </div>
             <div class="flex-shrink-0 flex flex-col gap-1.5 self-start">
-                <a href="{{ route('penjualan-harian.show', [$date, $shift]) }}"
+                <a href="<?php echo e(route('penjualan-harian.show', [$date, $shift])); ?>"
                    class="text-xs font-medium text-amber-700 underline hover:text-amber-900">
                     Lihat data →
                 </a>
-                    <form method="POST" action="{{ route('penjualan-harian.destroy', [$date, $shift]) }}"
-                      onsubmit="return confirm('Hapus data Shift {{ $shiftLabel }} {{ \Carbon\Carbon::parse($date)->format('d/m/Y') }}? Tindakan ini tidak bisa dibatalkan.')">
-                    @csrf
-                    @method('DELETE')
+                    <form method="POST" action="<?php echo e(route('penjualan-harian.destroy', [$date, $shift])); ?>"
+                      onsubmit="return confirm('Hapus data Shift <?php echo e($shiftLabel); ?> <?php echo e(\Carbon\Carbon::parse($date)->format('d/m/Y')); ?>? Tindakan ini tidak bisa dibatalkan.')">
+                    <?php echo csrf_field(); ?>
+                    <?php echo method_field('DELETE'); ?>
                     <button type="submit"
                             class="text-xs font-medium text-red-600 underline hover:text-red-800">
                         🗑 Hapus data
@@ -58,9 +69,9 @@
                 </form>
             </div>
         </div>
-        @endif
+        <?php endif; ?>
 
-        {{-- Notifikasi konflik --}}
+        
         <div x-show="conflictNotice" x-cloak
              class="mb-5 bg-red-50 border border-red-300 rounded-xl p-4 flex gap-3 items-start">
             <span class="text-red-500 text-xl flex-shrink-0">⚠️</span>
@@ -83,20 +94,20 @@
             </div>
         </div>
 
-        <form method="POST" action="{{ route('penjualan-harian.store') }}" id="penjualan-form" @submit.prevent="prepareSubmit">
-            @csrf
+        <form method="POST" action="<?php echo e(route('penjualan-harian.store')); ?>" id="penjualan-form" @submit.prevent="prepareSubmit">
+            <?php echo csrf_field(); ?>
 
-            <input type="hidden" name="original_date" value="{{ $date }}">
-            <input type="hidden" name="original_shift" value="{{ $shift }}">
+            <input type="hidden" name="original_date" value="<?php echo e($date); ?>">
+            <input type="hidden" name="original_shift" value="<?php echo e($shift); ?>">
 
-            {{-- Tanggal --}}
+            
             <div class="stat-card mb-5">
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-sm font-semibold text-surface-700 mb-2">📅 Tanggal Penjualan</label>
                         <input type="date" name="sale_date" id="sale_date"
-                               value="{{ old('sale_date', $date) }}"
-                               max="{{ today()->toDateString() }}"
+                               value="<?php echo e(old('sale_date', $date)); ?>"
+                               max="<?php echo e(today()->toDateString()); ?>"
                                required
                                class="input-field w-full">
                     </div>
@@ -104,23 +115,23 @@
                         <label class="block text-sm font-semibold text-surface-700 mb-2">🕐 Shift</label>
                         <select name="shift" id="shift_select" x-model="shift" @change="onShiftChange()"
                                 class="input-field w-full">
-                            <option value="pagi" {{ $shift === 'pagi' ? 'selected' : '' }}>☀️ Pagi</option>
-                            <option value="sore" {{ $shift === 'sore' ? 'selected' : '' }}>🌆 Sore</option>
+                            <option value="pagi" <?php echo e($shift === 'pagi' ? 'selected' : ''); ?>>☀️ Pagi</option>
+                            <option value="sore" <?php echo e($shift === 'sore' ? 'selected' : ''); ?>>🌆 Sore</option>
                         </select>
                     </div>
                 </div>
-                @if($fromKasir)
+                <?php if($fromKasir): ?>
                 <p class="mt-3 text-xs text-blue-600 font-medium bg-blue-50 rounded-lg px-3 py-2">
                     🧾 Data diambil dari Kasir POS. Periksa dan simpan untuk menyimpan ke Penjualan Harian.
                 </p>
-                @elseif($hasData)
+                <?php elseif($hasData): ?>
                 <p class="mt-3 text-xs text-amber-600 font-medium">
                     ⚠️ Sudah ada data untuk tanggal ini. Simpan akan menimpa data lama.
                 </p>
-                @endif
+                <?php endif; ?>
             </div>
 
-            {{-- Ringkasan live --}}
+            
             <div class="grid grid-cols-3 gap-4 mb-5">
                 <div class="bg-brand-50 border border-brand-100 rounded-xl p-4">
                     <p class="text-xs text-brand-500 font-medium uppercase">Total Terjual</p>
@@ -136,32 +147,33 @@
                 </div>
             </div>
 
-            {{-- Semua Produk --}}
+            
             <div class="card mb-4 overflow-hidden">
                 <div class="divide-y divide-surface-100">
-                    @foreach($products as $product)
+                    <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <div class="px-5 py-3 flex items-center gap-4"
-                         x-data="{ get item() { return items.find(i => i.id === {{ $product->id }}) } }">
+                         x-data="{ get item() { return items.find(i => i.id === <?php echo e($product->id); ?>) } }">
 
-                        {{-- Nama + harga --}}
+                        
                         <div class="flex-1 min-w-0">
-                            <p class="text-sm font-semibold text-surface-800 truncate">{{ $product->name }}</p>
+                            <p class="text-sm font-semibold text-surface-800 truncate"><?php echo e($product->name); ?></p>
                             <p class="text-xs text-surface-400">
-                                Rp {{ number_format($product->harga_jual, 0, ',', '.') }} / pcs
-                                @if($product->bahan_baku + $product->tenaga_kerja + $product->overhead > 0)
-                                · HPP Rp {{ number_format($product->bahan_baku + $product->tenaga_kerja + $product->overhead, 0, ',', '.') }}
-                                @endif
+                                Rp <?php echo e(number_format($product->harga_jual, 0, ',', '.')); ?> / pcs
+                                <?php if($product->bahan_baku + $product->tenaga_kerja + $product->overhead > 0): ?>
+                                · HPP Rp <?php echo e(number_format($product->bahan_baku + $product->tenaga_kerja + $product->overhead, 0, ',', '.')); ?>
+
+                                <?php endif; ?>
                             </p>
                         </div>
 
-                        {{-- Subtotal live --}}
+                        
                         <div class="text-right hidden sm:block w-32">
                             <p class="text-xs text-surface-400">Subtotal</p>
                             <p class="text-sm font-semibold text-surface-700"
                                x-text="item.qty > 0 ? 'Rp ' + fmt(item.qty * item.price) : '—'"></p>
                         </div>
 
-                        {{-- Qty input --}}
+                        
                         <div class="flex items-center gap-2 shrink-0">
                             <button type="button"
                                     @click="if(item.qty > 0) { item.qty--; recalc() }"
@@ -169,7 +181,7 @@
                                 −
                             </button>
                             <input type="number"
-                                   :name="'items[{{ $product->id }}][qty]'"
+                                   :name="'items[<?php echo e($product->id); ?>][qty]'"
                                    x-model.number="item.qty"
                                    @input="recalc()"
                                    @focus="$event.target.select()"
@@ -183,11 +195,11 @@
                             </button>
                         </div>
                     </div>
-                    @endforeach
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </div>
             </div>
 
-            {{-- Submit --}}
+            
             <div class="flex items-center justify-between stat-card">
                 <div>
                     <p class="text-sm text-surface-500">
@@ -200,7 +212,7 @@
                 </button>
             </div>
 
-            {{-- Spacer agar konten tidak tertutup floating bar --}}
+            
             <div class="h-16"></div>
 
         </form>
@@ -262,7 +274,7 @@ function penjualanForm(productData, initialShift) {
             // Kalau tanggal / shift berubah, cek konflik di server
             if (date !== origDate || this.shift !== origShift) {
                 try {
-                    const resp = await fetch(`{{ route('penjualan-harian.check') }}?date=${date}&shift=${this.shift}`, {
+                    const resp = await fetch(`<?php echo e(route('penjualan-harian.check')); ?>?date=${date}&shift=${this.shift}`, {
                         headers: { 'X-Requested-With': 'XMLHttpRequest' }
                     });
                     const json = await resp.json();
@@ -291,4 +303,14 @@ function penjualanForm(productData, initialShift) {
 }
 </script>
 
-</x-app-layout>
+ <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginal9ac128a9029c0e4701924bd2d73d7f54)): ?>
+<?php $attributes = $__attributesOriginal9ac128a9029c0e4701924bd2d73d7f54; ?>
+<?php unset($__attributesOriginal9ac128a9029c0e4701924bd2d73d7f54); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal9ac128a9029c0e4701924bd2d73d7f54)): ?>
+<?php $component = $__componentOriginal9ac128a9029c0e4701924bd2d73d7f54; ?>
+<?php unset($__componentOriginal9ac128a9029c0e4701924bd2d73d7f54); ?>
+<?php endif; ?>
+<?php /**PATH /Users/deniubaidillah/Documents/Project/Sistem_Keuangan_clean/resources/views/penjualan-harian/create.blade.php ENDPATH**/ ?>
