@@ -23,7 +23,7 @@
                         <x-input-label for="category" value="Kategori" />
                         <select id="category" name="category"
                             x-model="category"
-                            class="mt-1 block w-full border-surface-300 rounded-md shadow-sm focus:ring-brand-500 focus:border-brand-500">
+                            class="mt-1 input-field w-full">
                             <option value="">-- Pilih Kategori --</option>
                             <option value="pengeluaran" {{ old('category') === 'pengeluaran' ? 'selected' : '' }}>Pengeluaran</option>
                             <option value="pemasukan"   {{ old('category') === 'pemasukan'   ? 'selected' : '' }}>Pemasukan</option>
@@ -34,7 +34,7 @@
                     <div class="mb-4" x-show="category === 'pengeluaran'" x-cloak>
                         <x-input-label for="grup" value="Grup Dapur/BAR (opsional)" />
                         <select id="grup" name="grup"
-                            class="mt-1 block w-full border-surface-300 rounded-md shadow-sm focus:ring-brand-500 focus:border-brand-500">
+                            class="mt-1 input-field w-full">
                             <option value="">-- Tanpa Grup --</option>
                             <option value="Dapur" {{ old('grup') === 'Dapur' ? 'selected' : '' }}>🍳 Dapur</option>
                             <option value="BAR"   {{ old('grup') === 'BAR'   ? 'selected' : '' }}>☕ BAR</option>
@@ -47,7 +47,7 @@
                     <div class="mb-4">
                         <x-input-label for="description" value="Deskripsi (opsional)" />
                         <textarea id="description" name="description" rows="2"
-                            class="mt-1 block w-full border-surface-300 rounded-md shadow-sm focus:ring-brand-500 focus:border-brand-500 text-sm"
+                            class="mt-1 input-field w-full"
                             placeholder="Keterangan singkat jenis transaksi">{{ old('description') }}</textarea>
                         <x-input-error :messages="$errors->get('description')" class="mt-1" />
                     </div>
@@ -60,7 +60,7 @@
                     </div>
 
                     <div class="flex justify-end gap-3">
-                        <a href="{{ route('transaction-types.index') }}" class="px-4 py-2 text-sm text-surface-700 bg-surface-100 rounded-md hover:bg-surface-200">Batal</a>
+                        <a href="{{ route('transaction-types.index') }}" class="btn-secondary">Batal</a>
                         <x-primary-button>Simpan</x-primary-button>
                     </div>
                 </form>

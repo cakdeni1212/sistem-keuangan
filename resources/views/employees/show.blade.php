@@ -189,7 +189,7 @@
                                         </button>
                                         <button type="button"
                                             onclick="document.getElementById('modal-bayar-{{ $sal->id }}').classList.add('hidden')"
-                                            class="flex-1 py-2 bg-white border border-surface-300 text-surface-700 text-sm font-medium rounded-lg hover:bg-surface-50 transition">
+                                             class="btn-secondary flex-1">
                                             Batal
                                         </button>
                                     </div>

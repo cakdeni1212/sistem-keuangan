@@ -34,7 +34,7 @@
                     <div class="mb-4">
                         <x-input-label for="role" value="Role" />
                         <select id="role" name="role"
-                            class="mt-1 block w-full border-surface-300 rounded-md shadow-sm focus:ring-brand-500 focus:border-brand-500">
+                            class="mt-1 input-field w-full">
                             <option value="">-- Pilih Role --</option>
                             @foreach($roles as $role)
                                 <option value="{{ $role->name }}" {{ old('role') === $role->name ? 'selected' : '' }}>

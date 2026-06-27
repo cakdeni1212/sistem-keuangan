@@ -111,7 +111,7 @@
                         🚀 Upload & Import
                     </button>
                     <a href="{{ route('daily-revenues.index') }}"
-                       class="px-6 py-2.5 bg-white border border-surface-300 text-surface-700 text-sm font-medium rounded-xl hover:bg-surface-50 transition">
+                        class="btn-secondary">
                         Batal
                     </a>
                 </div>

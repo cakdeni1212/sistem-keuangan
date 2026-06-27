@@ -23,7 +23,7 @@
                     <div class="mb-4">
                         <x-input-label for="category" value="Kategori" />
                         <select id="category" name="category" x-model="category"
-                            class="mt-1 block w-full border-surface-300 rounded-md shadow-sm focus:ring-brand-500 focus:border-brand-500">
+                            class="mt-1 input-field w-full">
                             <option value="pengeluaran" {{ old('category', $transactionType->category) === 'pengeluaran' ? 'selected' : '' }}>Pengeluaran</option>
                             <option value="pemasukan"   {{ old('category', $transactionType->category) === 'pemasukan'   ? 'selected' : '' }}>Pemasukan</option>
                         </select>
@@ -33,7 +33,7 @@
                     <div class="mb-4" x-show="category === 'pengeluaran'" x-cloak>
                         <x-input-label for="grup" value="Grup Dapur/BAR (opsional)" />
                         <select id="grup" name="grup"
-                            class="mt-1 block w-full border-surface-300 rounded-md shadow-sm focus:ring-brand-500 focus:border-brand-500">
+                            class="mt-1 input-field w-full">
                             <option value="" {{ old('grup', $transactionType->grup) === null || old('grup', $transactionType->grup) === '' ? 'selected' : '' }}>-- Tanpa Grup --</option>
                             <option value="Dapur" {{ old('grup', $transactionType->grup) === 'Dapur' ? 'selected' : '' }}>🍳 Dapur</option>
                             <option value="BAR"   {{ old('grup', $transactionType->grup) === 'BAR'   ? 'selected' : '' }}>☕ BAR</option>
@@ -46,7 +46,7 @@
                     <div class="mb-4">
                         <x-input-label for="description" value="Deskripsi (opsional)" />
                         <textarea id="description" name="description" rows="2"
-                            class="mt-1 block w-full border-surface-300 rounded-md shadow-sm focus:ring-brand-500 focus:border-brand-500 text-sm">{{ old('description', $transactionType->description) }}</textarea>
+                            class="mt-1 input-field w-full">{{ old('description', $transactionType->description) }}</textarea>
                         <x-input-error :messages="$errors->get('description')" class="mt-1" />
                     </div>
 
