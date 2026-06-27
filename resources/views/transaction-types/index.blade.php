@@ -18,10 +18,10 @@
     <div class="py-6 px-4 sm:px-6 lg:px-8">
 
             @if(session('success'))
-                <div class="mb-4 px-4 py-3 bg-green-100 border border-green-300 text-green-800 rounded-lg">{{ session('success') }}</div>
+                <div class="alert-success">{{ session('success') }}</div>
             @endif
             @if(session('error'))
-                <div class="mb-4 px-4 py-3 bg-red-100 border border-red-300 text-red-800 rounded-lg">{{ session('error') }}</div>
+                <div class="alert-error">{{ session('error') }}</div>
             @endif
 
             @foreach(['pengeluaran' => 'Pengeluaran', 'pemasukan' => 'Pemasukan'] as $cat => $label)

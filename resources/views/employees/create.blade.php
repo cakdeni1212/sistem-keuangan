@@ -9,7 +9,7 @@
     <div class="py-6 px-4 sm:px-6 lg:px-8">
         <div class="max-w-3xl mx-auto">
             @if($errors->any())
-            <div class="mb-4 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
+            <div class="alert-error">
                 <ul class="list-disc list-inside space-y-1">
                     @foreach($errors->all() as $error)<li>{{ $error }}</li>@endforeach
                 </ul>
@@ -28,19 +28,19 @@
                                 <label class="block text-sm font-medium text-surface-700 mb-1">Nama Lengkap <span class="text-red-500">*</span></label>
                                 <input type="text" name="name" value="{{ old('name') }}" required
                                     placeholder="Contoh: Budi Santoso"
-                                    class="w-full border border-surface-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+                                    class="w-full input-field">
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-surface-700 mb-1">No HP / WhatsApp</label>
                                 <input type="text" name="phone" value="{{ old('phone') }}"
                                     placeholder="Contoh: 0812xxxxxxxx"
-                                    class="w-full border border-surface-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+                                    class="w-full input-field">
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-surface-700 mb-1">Email</label>
                                 <input type="email" name="email" value="{{ old('email') }}"
                                     placeholder="Contoh: budi@email.com"
-                                    class="w-full border border-surface-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+                                    class="w-full input-field">
                             </div>
                         </div>
                     </div>
@@ -51,7 +51,7 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-sm font-medium text-surface-700 mb-1">Jabatan <span class="text-red-500">*</span></label>
-                                <select name="position" required class="w-full border border-surface-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+                                <select name="position" required class="w-full input-field">
                                     <option value="">-- Pilih Jabatan --</option>
                                     @foreach($positions as $pos)
                                     <option value="{{ $pos }}" {{ old('position') == $pos ? 'selected' : '' }}>{{ $pos }}</option>
@@ -60,7 +60,7 @@
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-surface-700 mb-1">Divisi</label>
-                                <select name="department" class="w-full border border-surface-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+                                <select name="department" class="w-full input-field">
                                     <option value="">-- Pilih Divisi --</option>
                                     @foreach($departments as $dep)
                                     <option value="{{ $dep }}" {{ old('department') == $dep ? 'selected' : '' }}>{{ $dep }}</option>
@@ -69,7 +69,7 @@
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-surface-700 mb-1">Status Karyawan <span class="text-red-500">*</span></label>
-                                <select name="status" required class="w-full border border-surface-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+                                <select name="status" required class="w-full input-field">
                                     <option value="aktif" {{ old('status', 'aktif') == 'aktif' ? 'selected' : '' }}>Aktif</option>
                                     <option value="nonaktif" {{ old('status') == 'nonaktif' ? 'selected' : '' }}>Nonaktif</option>
                                 </select>
@@ -77,7 +77,7 @@
                             <div>
                                 <label class="block text-sm font-medium text-surface-700 mb-1">Tanggal Bergabung</label>
                                 <input type="date" name="join_date" value="{{ old('join_date') }}"
-                                    class="w-full border border-surface-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+                                    class="w-full input-field">
                             </div>
                             <div class="md:col-span-2">
                                 <label class="block text-sm font-medium text-surface-700 mb-1">Gaji Pokok <span class="text-red-500">*</span></label>
@@ -97,7 +97,7 @@
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                             <div>
                                 <label class="block text-sm font-medium text-surface-700 mb-1">Nama Bank</label>
-                                <select name="bank_name" class="w-full border border-surface-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+                                <select name="bank_name" class="w-full input-field">
                                     <option value="">-- Pilih Bank --</option>
                                     @foreach($banks as $bank)
                                     <option value="{{ $bank }}" {{ old('bank_name') == $bank ? 'selected' : '' }}>{{ $bank }}</option>
@@ -108,13 +108,13 @@
                                 <label class="block text-sm font-medium text-surface-700 mb-1">Nomor Rekening</label>
                                 <input type="text" name="account_number" value="{{ old('account_number') }}"
                                     placeholder="Contoh: 1234567890"
-                                    class="w-full border border-surface-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+                                    class="w-full input-field">
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-surface-700 mb-1">Nama Pemilik Rekening</label>
                                 <input type="text" name="account_name" value="{{ old('account_name') }}"
                                     placeholder="Sesuai nama di buku tabungan"
-                                    class="w-full border border-surface-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+                                    class="w-full input-field">
                             </div>
                         </div>
                     </div>
@@ -123,13 +123,13 @@
                     <div class="p-5">
                         <label class="block text-sm font-medium text-surface-700 mb-1">Catatan</label>
                         <textarea name="notes" rows="2" placeholder="Catatan tambahan..."
-                            class="w-full border border-surface-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">{{ old('notes') }}</textarea>
+                            class="w-full input-field">{{ old('notes') }}</textarea>
                     </div>
                 </div>
 
                 <div class="flex gap-3">
-                    <button type="submit" class="px-6 py-2 bg-brand-600 text-white rounded-lg hover:bg-brand-700 font-medium text-sm transition">Simpan</button>
-                    <a href="{{ route('employees.index') }}" class="px-6 py-2 bg-white border border-surface-300 text-surface-700 rounded-lg hover:bg-surface-50 font-medium text-sm transition">Batal</a>
+                    <button type="submit" class="btn-primary">Simpan</button>
+                    <a href="{{ route('employees.index') }}" class="btn-secondary">Batal</a>
                 </div>
             </form>
         </div>

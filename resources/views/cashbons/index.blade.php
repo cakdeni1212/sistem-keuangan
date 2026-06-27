@@ -6,7 +6,7 @@
                 <p class="text-xs text-surface-500 mt-0.5">Manajemen piutang / pinjaman karyawan & pelanggan</p>
             </div>
             @can('create cashbon')
-            <a href="{{ route('cashbons.create') }}" class="px-4 py-2 bg-brand-600 text-white text-sm font-medium rounded-lg hover:bg-brand-700 transition">
+            <a href="{{ route('cashbons.create') }}" class="btn-primary">
                 + Tambah Cashbon
             </a>
             @endcan
@@ -45,9 +45,7 @@
 
         {{-- Flash message --}}
         @if(session('success'))
-        <div class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg text-sm">
-            {{ session('success') }}
-        </div>
+        <div class="alert-success">{{ session('success') }}</div>
         @endif
 
         {{-- Filter bar --}}
@@ -101,9 +99,9 @@
                     </select>
                 </div>
                 <div class="flex gap-2">
-                    <button type="submit" class="px-4 py-1.5 bg-brand-600 text-white text-sm font-medium rounded-lg hover:bg-brand-700 transition">Filter</button>
+                    <button type="submit" class="btn-primary btn-sm">Filter</button>
                     @if(request()->hasAny(['search','status','debtor_type','month','year']))
-                    <a href="{{ route('cashbons.index') }}" class="px-4 py-1.5 bg-white border border-surface-300 text-surface-700 text-sm font-medium rounded-lg hover:bg-surface-50 transition">Reset</a>
+                    <a href="{{ route('cashbons.index') }}" class="btn-secondary btn-sm">Reset</a>
                     @endif
                 </div>
 
@@ -186,11 +184,11 @@
                             </td>
                             <td class="px-4 py-3 text-center">
                                 @if($cashbon->status === 'lunas')
-                                    <span class="inline-block px-2 py-0.5 bg-green-100 text-green-700 text-xs font-semibold rounded-full">Lunas</span>
+                                    <span class="badge badge-green">Lunas</span>
                                 @elseif($cashbon->is_overdue)
-                                    <span class="inline-block px-2 py-0.5 bg-red-100 text-red-700 text-xs font-semibold rounded-full">Terlambat</span>
+                                    <span class="badge badge-red">Terlambat</span>
                                 @else
-                                    <span class="inline-block px-2 py-0.5 bg-yellow-100 text-yellow-700 text-xs font-semibold rounded-full">Belum Bayar</span>
+                                    <span class="badge badge-yellow">Belum Bayar</span>
                                 @endif
                             </td>
                             <td class="px-4 py-3 text-center hidden md:table-cell">
@@ -353,16 +351,8 @@
 
                                 <p class="text-xs text-surface-400 mb-4">Pembayaran ini akan otomatis tercatat sebagai pemasukan (Pembayaran Cashbon).</p>
                                 <div class="flex gap-3 justify-end">
-                                    <button type="button"
-                                        x-data
-                                        @click="$dispatch('close')"
-                                        class="px-4 py-2 bg-white border border-surface-300 text-surface-700 text-sm font-medium rounded-lg hover:bg-surface-50 transition">
-                                        Batal
-                                    </button>
-                                    <button type="submit"
-                                        class="px-4 py-2 bg-green-600 text-white text-sm font-medium rounded-lg hover:bg-green-700 transition">
-                                        Tandai Lunas
-                                    </button>
+                                    <button type="button" x-data @click="$dispatch('close')" class="btn-secondary">Batal</button>
+                                    <button type="submit" class="btn-primary">Tandai Lunas</button>
                                 </div>
                             </form>
                         </x-modal>

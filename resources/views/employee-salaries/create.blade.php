@@ -10,7 +10,7 @@
         <div class="max-w-2xl mx-auto">
 
             @if($errors->any())
-            <div class="mb-4 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
+            <div class="alert-error">
                 <ul class="list-disc list-inside space-y-1">
                     @foreach($errors->all() as $e)<li>{{ $e }}</li>@endforeach
                 </ul>
@@ -34,7 +34,7 @@
                         <div class="grid grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-sm font-medium text-surface-700 mb-1">Bulan <span class="text-red-500">*</span></label>
-                                <select name="period_month" required class="w-full border border-surface-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+                                <select name="period_month" required class="w-full input-field">
                                     @php $months = ['','Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember']; @endphp
                                     @for($m = 1; $m <= 12; $m++)
                                     <option value="{{ $m }}" {{ old('period_month', now()->month) == $m ? 'selected' : '' }}>{{ $months[$m] }}</option>
@@ -43,7 +43,7 @@
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-surface-700 mb-1">Tahun <span class="text-red-500">*</span></label>
-                                <select name="period_year" required class="w-full border border-surface-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+                                <select name="period_year" required class="w-full input-field">
                                     @for($y = now()->year; $y >= 2020; $y--)
                                     <option value="{{ $y }}" {{ old('period_year', now()->year) == $y ? 'selected' : '' }}>{{ $y }}</option>
                                     @endfor
@@ -93,7 +93,7 @@
                         <div class="grid grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-sm font-medium text-surface-700 mb-1">Metode Bayar</label>
-                                <select name="payment_method" class="w-full border border-surface-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+                                <select name="payment_method" class="w-full input-field">
                                     <option value="">-- Pilih --</option>
                                     <option value="Transfer" {{ old('payment_method') == 'Transfer' ? 'selected' : '' }}>Transfer Bank</option>
                                     <option value="Tunai" {{ old('payment_method') == 'Tunai' ? 'selected' : '' }}>Tunai</option>
@@ -102,21 +102,21 @@
                             <div>
                                 <label class="block text-sm font-medium text-surface-700 mb-1">Tanggal Bayar</label>
                                 <input type="date" name="paid_at" value="{{ old('paid_at') }}"
-                                    class="w-full border border-surface-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+                                    class="w-full input-field">
                                 <p class="text-xs text-surface-400 mt-1">Kosongkan jika belum dibayar.</p>
                             </div>
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-surface-700 mb-1">Catatan</label>
                             <textarea name="notes" rows="2" placeholder="Catatan tambahan..."
-                                class="w-full border border-surface-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">{{ old('notes') }}</textarea>
+                                class="w-full input-field">{{ old('notes') }}</textarea>
                         </div>
                     </div>
                 </div>
 
                 <div class="flex gap-3">
-                    <button type="submit" class="px-6 py-2 bg-brand-600 text-white rounded-lg hover:bg-brand-700 font-medium text-sm transition">Simpan Gaji</button>
-                    <a href="{{ route('employees.show', $employee) }}" class="px-6 py-2 bg-white border border-surface-300 text-surface-700 rounded-lg hover:bg-surface-50 font-medium text-sm transition">Batal</a>
+                    <button type="submit" class="btn-primary">Simpan Gaji</button>
+                    <a href="{{ route('employees.show', $employee) }}" class="btn-secondary">Batal</a>
                 </div>
             </form>
         </div>

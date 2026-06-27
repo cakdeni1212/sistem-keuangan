@@ -10,7 +10,7 @@
         <div class="max-w-2xl mx-auto">
 
             @if($errors->any())
-            <div class="mb-4 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
+            <div class="alert-error">
                 <ul class="list-disc list-inside space-y-1">
                     @foreach($errors->all() as $error)<li>{{ $error }}</li>@endforeach
                 </ul>
@@ -31,13 +31,13 @@
                             <label class="block text-sm font-medium text-surface-700 mb-1">Nama Peminjam <span class="text-red-500">*</span></label>
                             <input type="text" name="debtor_name" value="{{ old('debtor_name', $cashbon->debtor_name) }}" required
                                 placeholder="Nama lengkap peminjam"
-                                class="w-full border border-surface-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+                                class="w-full input-field">
                         </div>
 
                         <div>
                             <label class="block text-sm font-medium text-surface-700 mb-1">Tipe Peminjam <span class="text-red-500">*</span></label>
                             <select name="debtor_type" x-model="debtorType" required
-                                class="w-full border border-surface-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+                                class="w-full input-field">
                                 <option value="karyawan" {{ old('debtor_type', $cashbon->debtor_type) === 'karyawan' ? 'selected' : '' }}>Karyawan</option>
                                 <option value="pelanggan" {{ old('debtor_type', $cashbon->debtor_type) === 'pelanggan' ? 'selected' : '' }}>Pelanggan</option>
                                 <option value="supplier" {{ old('debtor_type', $cashbon->debtor_type) === 'supplier' ? 'selected' : '' }}>Supplier</option>
@@ -48,7 +48,7 @@
                         <div x-show="debtorType === 'karyawan'" x-cloak>
                             <label class="block text-sm font-medium text-surface-700 mb-1">Pilih Karyawan</label>
                             <select name="employee_id"
-                                class="w-full border border-surface-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+                                class="w-full input-field">
                                 <option value="">-- Pilih Karyawan --</option>
                                 @foreach($employees as $emp)
                                 <option value="{{ $emp->id }}" {{ old('employee_id', $cashbon->employee_id) == $emp->id ? 'selected' : '' }}>{{ $emp->name }}</option>
@@ -74,19 +74,19 @@
                             <label class="block text-sm font-medium text-surface-700 mb-1">Keterangan</label>
                             <input type="text" name="description" value="{{ old('description', $cashbon->description) }}" maxlength="255"
                                 placeholder="Keperluan cashbon (opsional)"
-                                class="w-full border border-surface-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+                                class="w-full input-field">
                         </div>
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-sm font-medium text-surface-700 mb-1">Tanggal Hutang <span class="text-red-500">*</span></label>
                                 <input type="date" name="debt_date" value="{{ old('debt_date', $cashbon->debt_date->format('Y-m-d')) }}" required
-                                    class="w-full border border-surface-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+                                    class="w-full input-field">
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-surface-700 mb-1">Jatuh Tempo</label>
                                 <input type="date" name="due_date" value="{{ old('due_date', $cashbon->due_date?->format('Y-m-d')) }}"
-                                    class="w-full border border-surface-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+                                    class="w-full input-field">
                                 <p class="text-xs text-surface-400 mt-1">Kosongkan jika tidak ada jatuh tempo.</p>
                             </div>
                         </div>
@@ -95,7 +95,7 @@
                             <label class="block text-sm font-medium text-surface-700 mb-1">Catatan</label>
                             <textarea name="notes" rows="3" maxlength="500"
                                 placeholder="Catatan tambahan..."
-                                class="w-full border border-surface-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">{{ old('notes', $cashbon->notes) }}</textarea>
+                                class="w-full input-field">{{ old('notes', $cashbon->notes) }}</textarea>
                         </div>
                     </div>
                 </div>
@@ -211,8 +211,8 @@
                 </div>
 
                 <div class="flex gap-3">
-                    <button type="submit" class="px-6 py-2 bg-brand-600 text-white rounded-lg hover:bg-brand-700 font-medium text-sm transition">Simpan Perubahan</button>
-                    <a href="{{ route('cashbons.index') }}" class="px-6 py-2 bg-white border border-surface-300 text-surface-700 rounded-lg hover:bg-surface-50 font-medium text-sm transition">Batal</a>
+                    <button type="submit" class="btn-primary">Simpan Perubahan</button>
+                    <a href="{{ route('cashbons.index') }}" class="btn-secondary">Batal</a>
                 </div>
             </form>
         </div>

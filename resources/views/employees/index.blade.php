@@ -6,7 +6,7 @@
                 <p class="text-xs text-surface-500 mt-0.5">Data dan rekap gaji seluruh karyawan</p>
             </div>
             @can('create employee')
-            <a href="{{ route('employees.create') }}" class="px-4 py-2 bg-brand-600 text-white text-sm font-medium rounded-lg hover:bg-brand-700 transition">
+            <a href="{{ route('employees.create') }}" class="btn-primary">
                 + Tambah Karyawan
             </a>
             @endcan
@@ -142,9 +142,7 @@
 
         {{-- Flash message --}}
         @if(session('success'))
-        <div class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg text-sm">
-            {{ session('success') }}
-        </div>
+        <div class="alert-success">{{ session('success') }}</div>
         @endif
 
         {{-- Table Karyawan --}}
@@ -186,9 +184,9 @@
                             </td>
                             <td class="px-4 py-3 text-center">
                                 @if($emp->status === 'aktif')
-                                <span class="inline-block px-2 py-0.5 bg-green-100 text-green-700 text-xs font-semibold rounded-full">Aktif</span>
+                                <span class="badge badge-green">Aktif</span>
                                 @else
-                                <span class="inline-block px-2 py-0.5 bg-red-100 text-red-700 text-xs font-semibold rounded-full">Nonaktif</span>
+                                <span class="badge badge-red">Nonaktif</span>
                                 @endif
                             </td>
                             <td class="px-4 py-3 text-center">
@@ -469,9 +467,9 @@
                             <td class="px-4 py-3 text-right font-bold text-surface-800">Rp {{ number_format($sal->total_salary, 0, ',', '.') }}</td>
                             <td class="px-4 py-3 text-center">
                                 @if($sal->paid_at)
-                                    <span class="inline-block px-2 py-0.5 bg-green-100 text-green-700 text-xs font-semibold rounded-full">Terbayar</span>
+                                    <span class="badge badge-green">Terbayar</span>
                                 @else
-                                    <span class="inline-block px-2 py-0.5 bg-amber-100 text-amber-700 text-xs font-semibold rounded-full">Belum Bayar</span>
+                                    <span class="badge badge-yellow">Belum Bayar</span>
                                 @endif
                             </td>
                             <td class="px-4 py-3 text-center text-surface-500 text-xs hidden md:table-cell">

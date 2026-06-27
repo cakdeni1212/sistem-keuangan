@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex items-center gap-3">
             <a href="{{ route('admin.users.index') }}" class="btn-secondary btn-sm">&larr; Kembali</a>
-            <h2 class="font-semibold text-xl text-surface-800 leading-tight">Tambah User Baru</h2>
+            <h2 class="page-title">Tambah User Baru</h2>
         </div>
     </x-slot>
 
@@ -61,10 +61,7 @@
                     </div>
 
                     <div class="flex items-center justify-end gap-3">
-                        <a href="{{ route('admin.users.index') }}"
-                           class="px-4 py-2 text-sm text-surface-700 bg-surface-100 rounded-md hover:bg-surface-200">
-                            Batal
-                        </a>
+                        <a href="{{ route('admin.users.index') }}" class="btn-secondary">Batal</a>
                         <x-primary-button>Simpan User</x-primary-button>
                     </div>
                 </form>

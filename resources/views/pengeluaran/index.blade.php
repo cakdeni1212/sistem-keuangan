@@ -2,8 +2,8 @@
     <x-slot name="header">
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
             <div>
-                <h2 class="font-bold text-xl text-surface-800 dark:text-surface-100 leading-tight">Pengeluaran</h2>
-                <p class="text-xs text-surface-500 dark:text-surface-400 mt-0.5">Pantau dan analisis pengeluaran per periode</p>
+                <h2 class="page-title">Pengeluaran</h2>
+                <p class="page-desc">Pantau dan analisis pengeluaran per periode</p>
             </div>
             @can('create transactions')
             <a href="{{ route('transactions.create') }}"

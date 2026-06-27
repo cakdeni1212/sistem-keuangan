@@ -19,24 +19,23 @@
             <div class="bg-white shadow-sm rounded-xl overflow-hidden">
                 <div class="px-6 py-4 border-b border-surface-200 bg-surface-50 flex items-center justify-between">
                     @php
-                        $statusColors = ['draft'=>'gray','pending'=>'yellow','approved'=>'green','rejected'=>'red'];
-                        $c = $statusColors[$transaction->status];
+                        $badges = ['draft'=>'badge-gray','pending'=>'badge-yellow','approved'=>'badge-green','rejected'=>'badge-red'];
+                        $b = $badges[$transaction->status];
                     @endphp
-                    <span class="px-3 py-1 text-sm rounded-full font-medium bg-{{ $c }}-100 text-{{ $c }}-700">
+                    <span class="badge {{ $b }}">
                         {{ $transaction->status_label }}
                     </span>
                     <div class="flex gap-2">
                         @can('edit transactions')
                         @if(!in_array($transaction->status, ['approved','rejected']))
-                        <a href="{{ route('transactions.edit', $transaction) }}"
-                           class="px-3 py-1 text-sm bg-brand-600 text-white rounded-xl hover:bg-brand-700">Edit</a>
+                        <a href="{{ route('transactions.edit', $transaction) }}" class="btn-primary btn-sm">Edit</a>
                         @endif
                         @endcan
                         @can('approve transactions')
                         @if($transaction->status === 'pending')
                         <form method="POST" action="{{ route('transactions.approve', $transaction) }}">
                             @csrf
-                            <button type="submit" class="px-3 py-1 text-sm bg-green-600 text-white rounded-xl hover:bg-green-700">✓ Setujui</button>
+                            <button type="submit" class="btn-primary btn-sm">✓ Setujui</button>
                         </form>
                         @endif
                         @endcan
@@ -135,12 +134,9 @@
                     @csrf
                     <div class="flex gap-3">
                         <input type="text" name="rejection_reason" required
-                            class="flex-1 input-field !resize-y"
+                            class="flex-1 input-field"
                             placeholder="Masukkan alasan penolakan...">
-                        <button type="submit"
-                            class="px-4 py-2 bg-red-600 text-white text-sm rounded-xl hover:bg-red-700">
-                            ✗ Tolak
-                        </button>
+                        <button type="submit" class="btn-danger">✗ Tolak</button>
                     </div>
                     <x-input-error :messages="$errors->get('rejection_reason')" class="mt-1" />
                 </form>

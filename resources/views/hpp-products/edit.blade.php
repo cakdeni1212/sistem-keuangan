@@ -294,10 +294,7 @@
                         class="btn-primary">
                         Perbarui Produk
                     </button>
-                    <a href="{{ route('hpp-products.index') }}"
-                        class="px-6 py-2 bg-white border border-surface-300 text-surface-700 rounded-xl hover:bg-surface-50 font-medium text-sm transition">
-                        Batal
-                    </a>
+                    <a href="{{ route('hpp-products.index') }}" class="btn-secondary">Batal</a>
                 </div>
             </form>
         </div>

@@ -183,8 +183,7 @@
                         · Omset <span class="font-semibold text-surface-800" x-text="'Rp ' + fmt(totalOmset)"></span>
                     </p>
                 </div>
-                <button type="submit"
-                        class="inline-flex items-center gap-2 px-6 py-2.5 bg-brand-600 text-white text-sm font-semibold rounded-lg hover:bg-brand-700 transition">
+                <button type="submit" class="btn-primary">
                     💾 Simpan Penjualan
                 </button>
             </div>

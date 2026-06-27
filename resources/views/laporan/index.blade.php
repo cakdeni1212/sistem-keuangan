@@ -9,7 +9,7 @@
     <div class="py-6 px-4 sm:px-6 lg:px-8 space-y-5">
 
         @if(session('success'))
-            <div class="px-4 py-3 bg-green-100 border border-green-300 text-green-800 rounded-lg text-sm">{{ session('success') }}</div>
+            <div class="alert-success">{{ session('success') }}</div>
         @endif
 
         {{-- === OMSET HARIAN === --}}

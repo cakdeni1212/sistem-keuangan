@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex items-center gap-3">
             <a href="{{ route('transactions.index') }}" class="btn-secondary btn-sm">&larr; Kembali</a>
-            <h2 class="font-semibold text-xl text-surface-900 leading-tight">Edit Transaksi #{{ $transaction->id }}</h2>
+            <h2 class="page-title">Edit Transaksi #{{ $transaction->id }}</h2>
         </div>
     </x-slot>
 
@@ -114,7 +114,7 @@
                     </div>
 
                     <div class="flex justify-end gap-3">
-                        <a href="{{ route('transactions.index') }}" class="px-4 py-2 text-sm text-surface-700 bg-surface-100 rounded-xl hover:bg-surface-200">Batal</a>
+                        <a href="{{ route('transactions.index') }}" class="btn-secondary">Batal</a>
                         <x-primary-button>Perbarui Transaksi</x-primary-button>
                     </div>
                 </form>

@@ -5,21 +5,19 @@
                 <a href="{{ route('employees.index') }}" class="btn-secondary btn-sm">&larr; Kembali</a>
                 <h2 class="page-title">{{ $employee->name }}</h2>
                 @if($employee->status === 'aktif')
-                <span class="px-2 py-0.5 bg-green-100 text-green-700 text-xs font-semibold rounded-full">Aktif</span>
+                <span class="badge badge-green">Aktif</span>
                 @else
-                <span class="px-2 py-0.5 bg-red-100 text-red-700 text-xs font-semibold rounded-full">Nonaktif</span>
+                <span class="badge badge-red">Nonaktif</span>
                 @endif
             </div>
             <div class="flex gap-2">
                 @can('create salary')
-                <a href="{{ route('employee-salaries.create', $employee) }}" class="px-4 py-2 bg-brand-600 text-white text-sm font-medium rounded-lg hover:bg-brand-700 transition">
+                <a href="{{ route('employee-salaries.create', $employee) }}" class="btn-primary">
                     + Input Gaji
                 </a>
                 @endcan
                 @can('edit employee')
-                <a href="{{ route('employees.edit', $employee) }}" class="px-4 py-2 bg-white border border-surface-300 text-surface-700 text-sm font-medium rounded-lg hover:bg-surface-50 transition">
-                    Edit Data
-                </a>
+                <a href="{{ route('employees.edit', $employee) }}" class="btn-secondary">Edit Data</a>
                 @endcan
             </div>
         </div>
@@ -28,7 +26,7 @@
     <div class="py-6 px-4 sm:px-6 lg:px-8 space-y-5">
 
         @if(session('success'))
-        <div class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg text-sm">{{ session('success') }}</div>
+        <div class="alert-success">{{ session('success') }}</div>
         @endif
 
         {{-- Info Cards --}}
@@ -124,9 +122,9 @@
                             <td class="px-4 py-3 text-right font-bold text-surface-900">Rp {{ number_format($sal->total_salary, 0, ',', '.') }}</td>
                             <td class="px-4 py-3 text-center">
                                 @if($sal->paid_at)
-                                <span class="inline-block px-2 py-0.5 bg-green-100 text-green-700 text-xs font-semibold rounded-full" title="{{ $sal->paid_at->format('d M Y') }}">Dibayar</span>
+                                <span class="badge badge-green" title="{{ $sal->paid_at->format('d M Y') }}">Dibayar</span>
                                 @else
-                                <span class="inline-block px-2 py-0.5 bg-yellow-100 text-yellow-700 text-xs font-semibold rounded-full">Belum Bayar</span>
+                                <span class="badge badge-yellow">Belum Bayar</span>
                                 @endif
                             </td>
                             <td class="px-4 py-3 text-center text-surface-500 text-xs">{{ $sal->payment_method ?? '—' }}</td>

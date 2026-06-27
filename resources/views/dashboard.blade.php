@@ -2,8 +2,8 @@
     <x-slot name="header">
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
             <div>
-                <h2 class="font-bold text-xl text-surface-900 leading-tight">Dashboard</h2>
-                <p class="text-sm text-surface-400 mt-0.5">Ringkasan keuangan & aktivitas terbaru</p>
+                <h2 class="page-title">Dashboard</h2>
+                <p class="page-desc">Ringkasan keuangan & aktivitas terbaru</p>
             </div>
             <div class="flex items-center gap-2">
                 <form action="{{ route('transactions.index') }}" method="GET"

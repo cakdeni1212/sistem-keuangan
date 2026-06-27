@@ -64,10 +64,7 @@
                     </div>
 
                     <div class="flex items-center justify-end gap-3">
-                        <a href="{{ route('admin.users.index') }}"
-                           class="px-4 py-2 text-sm text-surface-700 bg-surface-100 rounded-md hover:bg-surface-200">
-                            Batal
-                        </a>
+                        <a href="{{ route('admin.users.index') }}" class="btn-secondary">Batal</a>
                         <x-primary-button>Perbarui User</x-primary-button>
                     </div>
                 </form>

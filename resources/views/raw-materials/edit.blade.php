@@ -30,13 +30,13 @@
                                     Nama Bahan <span class="text-red-500">*</span>
                                 </label>
                                 <input type="text" name="name" value="{{ old('name', $rawMaterial->name) }}" required
-                                    class="w-full border border-surface-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+                                    class="w-full input-field">
                                 @error('name')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-surface-700 mb-1">Kategori</label>
                                 <input type="text" name="category" value="{{ old('category', $rawMaterial->category) }}"
-                                    class="w-full border border-surface-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
+                                    class="w-full input-field"
                                     placeholder="Cth: Kopi, Susu, Sirup">
                                 @error('category')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
                             </div>
@@ -47,7 +47,7 @@
                                 Satuan <span class="text-red-500">*</span>
                             </label>
                             <input type="text" name="unit" id="unit-input" value="{{ old('unit', $rawMaterial->unit) }}" required
-                                class="w-full border border-surface-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+                                class="w-full input-field">
                             <div class="flex flex-wrap gap-2 mt-2">
                                 @foreach(['gram', 'ml', 'kg', 'liter', 'pcs', 'sdm', 'bungkus'] as $unit)
                                 <button type="button"
@@ -73,7 +73,7 @@
                                 <input type="number" name="stock_quantity"
                                     value="{{ old('stock_quantity', $rawMaterial->stock_quantity) }}"
                                     min="0" step="0.001" x-model="stock"
-                                    class="w-full border border-surface-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+                                    class="w-full input-field">
                                 @error('stock_quantity')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
                             </div>
                             <div>
@@ -106,7 +106,7 @@
                         <div>
                             <label class="block text-sm font-medium text-surface-700 mb-1">Catatan</label>
                             <textarea name="notes" rows="2"
-                                class="w-full border border-surface-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
+                                class="w-full input-field"
                                 placeholder="Informasi tambahan, supplier, dll.">{{ old('notes', $rawMaterial->notes) }}</textarea>
                             @error('notes')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
                         </div>
@@ -122,14 +122,8 @@
                 </div>
 
                 <div class="flex gap-3">
-                    <button type="submit"
-                        class="px-6 py-2 bg-brand-600 text-white rounded-lg hover:bg-brand-700 font-medium text-sm transition">
-                        Perbarui Bahan Baku
-                    </button>
-                    <a href="{{ route('raw-materials.index') }}"
-                        class="px-6 py-2 bg-white border border-surface-300 text-surface-700 rounded-lg hover:bg-surface-50 font-medium text-sm transition">
-                        Batal
-                    </a>
+                    <button type="submit" class="btn-primary">Perbarui Bahan Baku</button>
+                    <a href="{{ route('raw-materials.index') }}" class="btn-secondary">Batal</a>
                 </div>
             </form>
 

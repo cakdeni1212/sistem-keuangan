@@ -3,8 +3,7 @@
         <div class="flex items-center justify-between">
             <h2 class="page-title">📦 Stok Bahan Baku</h2>
             @can('create raw-material')
-            <a href="{{ route('raw-materials.create') }}"
-               class="px-4 py-2 bg-brand-600 text-white text-sm font-medium rounded-lg hover:bg-brand-700 transition">
+            <a href="{{ route('raw-materials.create') }}" class="btn-primary">
                 + Tambah Bahan Baku
             </a>
             @endcan
@@ -15,14 +14,10 @@
 
         {{-- Flash messages --}}
         @if(session('success'))
-        <div class="mb-4 px-4 py-3 bg-green-50 border border-green-200 text-green-800 rounded-lg text-sm">
-            {{ session('success') }}
-        </div>
+        <div class="alert-success">{{ session('success') }}</div>
         @endif
         @if(session('error'))
-        <div class="mb-4 px-4 py-3 bg-red-50 border border-red-200 text-red-800 rounded-lg text-sm">
-            {{ session('error') }}
-        </div>
+        <div class="alert-error">{{ session('error') }}</div>
         @endif
 
         {{-- Summary cards --}}
@@ -45,7 +40,7 @@
         <div class="card">
             <div class="overflow-x-auto">
                 <table class="w-full text-sm">
-                    <thead class="bg-surface-50 text-left">
+                            <thead class="table-th">
                         <tr>
                             <th class="px-4 py-3 text-xs font-semibold text-surface-500 uppercase tracking-wide">#</th>
                             <th class="px-4 py-3 text-xs font-semibold text-surface-500 uppercase tracking-wide">Nama</th>
@@ -71,9 +66,9 @@
                             <td class="px-4 py-3 text-right text-surface-700">Rp {{ number_format($item->price_per_unit, 0, ',', '.') }}</td>
                             <td class="px-4 py-3 text-center">
                                 @if($item->is_active)
-                                    <span class="px-2 py-0.5 text-xs font-medium bg-green-100 text-green-700 rounded-full">Aktif</span>
+                                    <span class="badge badge-green">Aktif</span>
                                 @else
-                                    <span class="px-2 py-0.5 text-xs font-medium bg-red-100 text-red-700 rounded-full">Nonaktif</span>
+                                    <span class="badge badge-red">Nonaktif</span>
                                 @endif
                             </td>
                             <td class="px-4 py-3 text-center text-surface-500">
